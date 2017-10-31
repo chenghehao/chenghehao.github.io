@@ -274,6 +274,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-基于九宫格的碰撞检测" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/10/31/基于九宫格的碰撞检测/" class="article-date">
+      <time datetime="2017-10-31T13:02:47.000Z" itemprop="datePublished">2017-10-31</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/10/31/基于九宫格的碰撞检测/">基于九宫格的碰撞检测</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>#HTML</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"target"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>#CSS</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.target</span>,</div><div class="line">       <span class="selector-class">.box</span>&#123;</div><div class="line">           <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">           <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">           <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(228,63,174);</div><div class="line">           <span class="attribute">position</span>: absolute;</div><div class="line">           <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">           <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">           <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%,-50%);</div><div class="line">       &#125;</div><div class="line">       <span class="selector-class">.box</span>&#123;</div><div class="line">           <span class="attribute">left</span>: <span class="number">100px</span>;</div><div class="line">           <span class="attribute">top</span>: <span class="number">50px</span>;</div><div class="line">           <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(51,217,199);</div><div class="line">           <span class="attribute">transform</span>: none;</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+<p>#JS</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">        <span class="keyword">var</span> target = <span class="built_in">document</span>.querySelector(<span class="string">'.target'</span>);</div><div class="line">        <span class="keyword">var</span> box = <span class="built_in">document</span>.querySelector(<span class="string">'.box'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">var</span> dx,dy;</div><div class="line"></div><div class="line">        box.addEventListener(<span class="string">'mousedown'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="comment">//由于可能拖拽文字移动，所以首先要阻止这个默认行为</span></div><div class="line">            e.preventDefault();</div><div class="line"></div><div class="line">            <span class="comment">//求出鼠标按下那一刻，距离元素（div）左侧和右侧的那一段距离</span></div><div class="line">            <span class="keyword">var</span> rect = getRect(<span class="keyword">this</span>);</div><div class="line">            dx = e.pageX - rect.left;</div><div class="line">            dy = e.pageY - rect.top;</div><div class="line"></div><div class="line">            <span class="comment">//按下之后可以移动</span></div><div class="line"></div><div class="line">            <span class="built_in">document</span>.addEventListener(<span class="string">'mousemove'</span>,moveDiv);</div><div class="line">            <span class="built_in">document</span>.addEventListener(<span class="string">'mouseup'</span>,cancelMoveDiv);</div><div class="line"></div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">moveDiv</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> x = e.pageX - dx;</div><div class="line">            <span class="keyword">var</span> y = e.pageY - dy;</div><div class="line"></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (duang(box,target))&#123;</div><div class="line">                target.style.backgroundColor = <span class="string">'pink'</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                target.style.backgroundColor = <span class="string">''</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            box.style.left = x + <span class="string">'px'</span>;</div><div class="line">            box.style.top = y + <span class="string">'px'</span>;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">cancelMoveDiv</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.removeEventListener(<span class="string">'mousemove'</span>,moveDiv);</div><div class="line">            <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseup'</span>,cancelMoveDiv);</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getRect</span>(<span class="params">ele</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> ele.getBoundingClientRect()</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">duang</span>(<span class="params">ele1,ele2</span>) </span>&#123;   <span class="comment">// 若是成立说明碰撞，返回true</span></div><div class="line">            <span class="keyword">var</span> rect1 = ele1.getBoundingClientRect();</div><div class="line">            <span class="keyword">var</span> rect2 = ele2.getBoundingClientRect();</div><div class="line">            <span class="keyword">return</span> rect1.right &gt; rect2.left &amp;&amp; rect1.left &lt; rect2.right &amp;&amp; rect1.bottom &gt; rect2.top &amp;&amp; rect1.top &lt; rect2.bottom;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-拖拽的基本原理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
