@@ -274,6 +274,65 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-验证QQ邮箱原理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/11/15/验证QQ邮箱原理/" class="article-date">
+      <time datetime="2017-11-15T06:52:51.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/11/15/验证QQ邮箱原理/">验证QQ邮箱原理</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>#HTML<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">'text'</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>验证<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>#JS<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> inp = <span class="built_in">document</span>.querySelector(<span class="string">'#text'</span>);</div><div class="line"><span class="keyword">let</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">'#btn'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/[1-9]\d&#123;4,9&#125;@qq\.com/</span></div><div class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(inp.value.match(reg))&#123;</div><div class="line">    alert(<span class="string">'验证通过'</span>);</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    alert(<span class="string">'验证失败'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-正则表达式-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
