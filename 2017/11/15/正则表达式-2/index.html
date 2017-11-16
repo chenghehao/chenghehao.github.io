@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="程合浩">
 <meta property="og:description" content="#贪婪模式和非贪婪模式：  贪婪模式和非贪婪模式，默认是贪婪模式非贪婪模式加 ？12345// 贪婪模式尽可能多的进行匹配console.log(&apos;123456&apos;.replace(/\d&amp;#123;2,4&amp;#125;/, &apos;X&apos;));   // X56// 非贪婪模式尽可能少的进行匹配console.log(&apos;123456&apos;.replace(/\d&amp;#123;2,4&amp;#125;?/, &apos;X&apos;));">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-15T06:50:12.000Z">
+<meta property="og:updated_time" content="2017-11-16T06:21:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式(2)">
 <meta name="twitter:description" content="#贪婪模式和非贪婪模式：  贪婪模式和非贪婪模式，默认是贪婪模式非贪婪模式加 ？12345// 贪婪模式尽可能多的进行匹配console.log(&apos;123456&apos;.replace(/\d&amp;#123;2,4&amp;#125;/, &apos;X&apos;));   // X56// 非贪婪模式尽可能少的进行匹配console.log(&apos;123456&apos;.replace(/\d&amp;#123;2,4&amp;#125;?/, &apos;X&apos;));">
@@ -343,6 +343,15 @@
 <blockquote>
 <p>[\u4e00-\u9fa5]   匹配中文<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">'你好，老王!'</span>.replace(<span class="regexp">/([\u4e00-\u9fa5]&#123;2&#125;)/</span>, <span class="string">'hello'</span>));   <span class="comment">// hello，老王!</span></div></pre></td></tr></table></figure></p>
 </blockquote>
+<p>#重复子项：</p>
+<blockquote>
+<p>\1表示重复正则第一个圆括号内匹配到的内容<br>\2表示重复正则第二个圆括号内匹配到的内容<br>..<br>\9<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1221</span></div><div class="line"><span class="keyword">const</span> reg = <span class="regexp">/1221/</span>;</div><div class="line"><span class="keyword">const</span> reg = <span class="regexp">/(1)(2)\2\1/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">'1221'</span>));   <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>#前瞻表达式：</p>
+<blockquote>
+<p>(?=exp) 正向前瞻 匹配后面满足表达式exp的位置<br>(?!exp) 负向前瞻 匹配后面不满足表达式exp的位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> str = <span class="string">'Hello, he is say hi, ni shuo ta shi bu shi sha!'</span>;</div><div class="line"><span class="keyword">const</span> ret = str.replace(<span class="regexp">/\w(?=i)/g</span>, <span class="string">'X'</span>);  <span class="comment">// 字符后边是i的替换成'X'</span></div><div class="line"><span class="built_in">console</span>.log(ret);     <span class="comment">// Hello, he is say Xi, Xi shuo ta sXi bu sXi sha!</span></div><div class="line"><span class="built_in">console</span>.log(str.replace(<span class="regexp">/s(?!a)/g</span>, <span class="string">'X'</span>));   <span class="comment">// Hello, he iX say hi, ni Xhuo ta Xhi bu Xhi Xha!</span></div><div class="line"><span class="comment">//s后边不是a的s都替换成'X'</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>#常用的正则匹配验证：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 匹配手机号</span></div><div class="line"><span class="keyword">const</span> phoneReg = <span class="regexp">/^1\d&#123;10&#125;$/</span>;</div><div class="line"><span class="comment">// 匹配qq</span></div><div class="line"><span class="keyword">const</span> qqReg = <span class="regexp">/^[1-9]\d&#123;4,10&#125;$/</span>;</div><div class="line"><span class="comment">// 匹配邮箱</span></div><div class="line"><span class="keyword">const</span> emailReg = <span class="regexp">/^([a-z\d]+(\.|-|_)?)+[a-z\d]+@[a-z\d]&#123;2,&#125;(\.[a-z]&#123;2,&#125;)&#123;1,5&#125;$/i</span>;</div><div class="line"><span class="comment">// 匹配日期</span></div><div class="line"><span class="keyword">const</span> dateReg = <span class="regexp">/^\d&#123;4&#125;(-|/</span>|\.)\d&#123;<span class="number">2</span>&#125;(-|<span class="regexp">/|\.)\d&#123;2&#125;$/</span>;</div><div class="line"><span class="comment">// 匹配身份证</span></div><div class="line"><span class="keyword">const</span> cardReg = <span class="regexp">/(^\d&#123;15&#125;$)|(^\d&#123;17&#125;([0-9]|X)$)/</span>;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -354,7 +363,7 @@
         <p><span>本文标题:</span><a  href="/2017/11/15/正则表达式-2/">正则表达式(2)</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 程合浩的博客 的个人博客">程合浩的博客</a></p>
         <p><span>发布时间:</span>2017年11月15日 - 14时45分</p>
-        <p><span>最后更新:</span>2017年11月15日 - 14时50分</p>
+        <p><span>最后更新:</span>2017年11月16日 - 14时21分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/15/正则表达式-2/" title="正则表达式(2)">chenghehao.github.io/2017/11/15/正则表达式-2/</a>
             <span class="copy-path" data-clipboard-text="原文: chenghehao.github.io/2017/11/15/正则表达式-2/　　作者: 程合浩的博客" title=""></span>
